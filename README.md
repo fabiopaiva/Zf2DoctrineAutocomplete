@@ -5,9 +5,9 @@ A form element autocomplete for Doctrine 2 and ZF2
 
 ## Requirements
 
-[DoctrineModule](https://github.com/doctrine/doctrinemodule).
-[jQuery](http://jquery.com).
-[jQueryUi](http://jqueryui.com).
+[DoctrineModule](https://github.com/doctrine/doctrinemodule), 
+[jQuery](http://jquery.com), 
+[jQueryUi](http://jqueryui.com), 
 
 ## Instalation
 
@@ -16,9 +16,17 @@ A form element autocomplete for Doctrine 2 and ZF2
     cd vendor
     git clone https://github.com/fabiopaiva/Zf2DoctrineAutocomplete
 
-### Copy javascript initializer to your public folder
+'Copy javascript initializer to your public folder
 
     cp data/zf2-doctrine-autocomplete.min.js public/js/
+
+### Using composer
+
+    php composer.phar require fabiopaiva/zf2-doctrine-autocomplete:dev-master
+
+'Copy javascript initializer to your public folder
+
+    cp vendor/fabiopaiva/zf2-doctrine-autocomplete/data/zf2-doctrine-autocomplete.min.js public/js/
 
 ## Enable the module
 Enable this module in your application.config.php
