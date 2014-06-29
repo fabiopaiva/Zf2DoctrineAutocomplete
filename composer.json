@@ -1,0 +1,29 @@
+{
+    "name": "fabiopaiva/zf2-doctrine-autocomplete",
+    "description": "Provides a autocomplete form for ZF2 and Doctrine2.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "zf2"
+    ],
+    "homepage": "https://github.com/fabiopaiva/Zf2DoctrineAutocomplete",
+    "authors": [
+        {
+            "name": "Fábio Paiva",
+            "email": "paiva.fabiofelipe@gmail.com",
+            "homepage": "http://sigweb.net.br"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+	"doctrine/doctrine-module": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "Zf2DoctrineAutocomplete": "src/"
+        },
+        "classmap": [
+            "./"
+        ]
+    }
+}
