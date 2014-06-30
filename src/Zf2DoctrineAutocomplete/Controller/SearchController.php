@@ -39,6 +39,7 @@ class SearchController extends AbstractActionController {
         /* @var $qb \Doctrine\ORM\QueryBuilder */
         $qb = $proxy->getObjectManager()->getRepository($proxy->getTargetClass())
                 ->createQueryBuilder('q');
+        $qb->setMaxResults(20);
 
         foreach ($options['searchFields'] as $field) {
             $qb->orWhere($qb->expr()->like('q.' . $field, $qb->expr()->literal("%{$term}%")));
@@ -65,7 +66,7 @@ class SearchController extends AbstractActionController {
         if (!empty($objects)) {
             $entityOptions = $this->getOptions();
             foreach ($objects as $key => $object) {
-                if (is_callable($entityOptions['label_generator']) && null !== ($generatedLabel = call_user_func($entityOptions['label_generator'], $object))) {
+                if (isset($entityOptions['label_generator']) && is_callable($entityOptions['label_generator']) && null !== ($generatedLabel = call_user_func($entityOptions['label_generator'], $object))) {
                     $label = $generatedLabel;
                 } elseif ($property = $proxy->getProperty()) {
                     if ($proxy->getIsMethod() == false && !$metadata->hasField($property)) {

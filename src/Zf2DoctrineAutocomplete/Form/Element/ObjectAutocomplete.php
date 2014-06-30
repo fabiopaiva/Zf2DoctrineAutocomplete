@@ -5,7 +5,7 @@
  */
 
 namespace Zf2DoctrineAutocomplete\Form\Element;
-
+use RuntimeException;
 use Zend\Form\Element\Text;
 use DoctrineModule\Form\Element\Proxy;
 
@@ -17,16 +17,47 @@ class ObjectAutocomplete extends Text {
     protected $proxy;
     private $initialized = false;
 
+    /**
+     * 
+     * @param mixed $value
+     * @return void
+     * @throws \RuntimeException
+     */
     public function setValue($value) {
+        if(!is_object($value)){
+            $this->setAttribute('data-zf2doctrineacid', $value);
+            return parent::setValue($value);
+        }
         $id = $this->getProxy()->getValue($value);
         $this->setAttribute('data-zf2doctrineacid', $id);
-        /* @var $qb \Doctrine\ORM\QueryBuilder */
+        $metadata   = $this->getProxy()->getObjectManager()
+                ->getClassMetadata($this->getProxy()->getTargetClass());
+        $identifier = $metadata->getIdentifierFieldNames();
         $object = $this->getProxy()->getObjectManager()
                         ->getRepository($this->getProxy()->getTargetClass())->find($id);
-        if (is_callable($this->getOption('label_generator')) && null !== ($generatedLabel = call_user_func($this->getOption('label_generator'), $object))) {
+        if (
+                is_callable($this->getOption('label_generator')) 
+                && null !== ($generatedLabel = call_user_func($this->getOption('label_generator'), $object))
+                ) {
             $label = $generatedLabel;
         } elseif ($property = $this->getProxy()->getProperty()) {
+            if ($this->getProxy()->getIsMethod() == false && !$metadata->hasField($property)) {
+                        throw new RuntimeException(
+                            sprintf(
+                                'Property "%s" could not be found in object "%s"',
+                                $property,
+                                $targetClass
+                            )
+                        );
+                    }
             $getter = 'get' . ucfirst($property);
+            //var_dump(get_class($object));
+            //var_dump(get_class_methods($object));
+            if (!is_callable(array($object, $getter))) {
+                        throw new RuntimeException(
+                            sprintf('Method "%s::%s" is not callable', $this->getProxy()->getTargetClass(), $getter)
+                        );
+                    }
             $label = $object->{$getter}();
         } else {
             if (!is_callable(array($object, '__toString'))) {
@@ -59,6 +90,7 @@ class ObjectAutocomplete extends Text {
     public function setOptions($options) {
         if (!$this->initialized) {
             $this->setAttribute('data-zf2doctrineacclass', urlencode(str_replace('\\', '-', $options['class'])));
+            $this->setAttribute('data-zf2doctrineacproperty', $options['property']);
             $this->setAttribute('data-zf2doctrineacinit', 'zf2-doctrine-autocomplete');
             $this->initialized = true;
         }

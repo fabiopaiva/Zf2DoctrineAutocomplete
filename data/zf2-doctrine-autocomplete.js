@@ -8,6 +8,7 @@ var zf2DoctrineAutocomplete = {
                 .find("input[data-zf2doctrineacinit='zf2-doctrine-autocomplete']")
                 .each(function() {
                     var _class = $(this).data('zf2doctrineacclass');
+                    var _property = $(this).data('zf2doctrineacproperty');
                     if (_class == null)
                         return;
                     /*
@@ -15,13 +16,17 @@ var zf2DoctrineAutocomplete = {
                      */
                     $(this).data('zf2doctrineacinit', null);
                     $(this).data('zf2doctrineacclass', null);
+                    $(this).data('zf2doctrineacproperty', null);
                     /**
                      * Wrap
                      */
                     $(this).wrap('<div class="wrap-zf2-doctrine-autocomplete"></div>');
                     var _clone = $(this).clone(true);
-                    $(this).attr('type', 'hidden').addClass('zf2-doctrine-autocomplete-id');
-                    _clone.attr('name', 'label_' + _clone.attr('name'));
+                    $(this)
+                            .attr('name', $(this).attr('name') + '[id]')
+                            .attr('type', 'hidden')
+                            .addClass('zf2-doctrine-autocomplete-id');
+                    _clone.attr('name', _clone.attr('name') + '['+_property+']');
                     if ($(this).data('data-zf2doctrineacid')) {
                         $(this).val($(this).data('data-zf2doctrineacid'));
                         $(this).data('data-zf2doctrineacid', null);
@@ -85,5 +90,3 @@ $(document).ready(function() {
     }
     zf2DoctrineAutocomplete.init('body');
 });
-
-
