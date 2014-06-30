@@ -39,6 +39,7 @@ class SearchController extends AbstractActionController {
         /* @var $qb \Doctrine\ORM\QueryBuilder */
         $qb = $proxy->getObjectManager()->getRepository($proxy->getTargetClass())
                 ->createQueryBuilder('q');
+        $qb->setMaxResults(20);
 
         foreach ($options['searchFields'] as $field) {
             $qb->orWhere($qb->expr()->like('q.' . $field, $qb->expr()->literal("%{$term}%")));
