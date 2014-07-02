@@ -22,7 +22,10 @@ A form element autocomplete for Doctrine 2 and ZF2
 
 ### Copy javascript initializer to your public folder
 
+    # if composer
     cp vendor/fabiopaiva/zf2-doctrine-autocomplete/data/zf2-doctrine-autocomplete.min.js public/js/
+    # if github
+    cp vendor/Zf2DoctrineAutocomplete/data/zf2-doctrine-autocomplete.min.js public/js/
 
 ## Enable the module
 Enable this module in your application.config.php
