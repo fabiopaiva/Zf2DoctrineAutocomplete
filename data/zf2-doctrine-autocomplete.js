@@ -8,6 +8,7 @@ var zf2DoctrineAutocomplete = {
                 .find("input[data-zf2doctrineacinit='zf2-doctrine-autocomplete']")
                 .each(function() {
                     var _class = $(this).data('zf2doctrineacclass');
+                    var _select_warning_message = $(this).data('zf2doctrineacselectwarningmessage');
                     var _property = $(this).data('zf2doctrineacproperty');
                     if (_class == null)
                         return;
@@ -26,7 +27,7 @@ var zf2DoctrineAutocomplete = {
                             .attr('name', $(this).attr('name') + '[id]')
                             .attr('type', 'hidden')
                             .addClass('zf2-doctrine-autocomplete-id');
-                    _clone.attr('name', _clone.attr('name') + '['+_property+']');
+                    _clone.attr('name', _clone.attr('name') + '[' + _property + ']');
                     if ($(this).data('data-zf2doctrineacid')) {
                         $(this).val($(this).data('data-zf2doctrineacid'));
                         $(this).data('data-zf2doctrineacid', null);
@@ -59,7 +60,7 @@ var zf2DoctrineAutocomplete = {
                                         .find('.zf2-doctrine-autocomplete-id')
                                         .val('');
                                 $(this).parent().find('.zf2-doctrine-autocomplete-msg')
-                                        .html('Select in list').addClass('bg-warning');
+                                        .html(_select_warning_message ? _select_warning_message : 'Select in list').addClass('bg-warning');
                             }
                         },
                         select: function(event, ui) {

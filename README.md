@@ -9,22 +9,18 @@ A form element autocomplete for Doctrine 2 and ZF2
 [jQuery](http://jquery.com), 
 [jQueryUi](http://jqueryui.com), 
 
-## Instalation
+## Installation
 
 ### Using github
 
     cd vendor
     git clone https://github.com/fabiopaiva/Zf2DoctrineAutocomplete
 
-'Copy javascript initializer to your public folder
-
-    cp data/zf2-doctrine-autocomplete.min.js public/js/
-
 ### Using composer
 
     php composer.phar require fabiopaiva/zf2-doctrine-autocomplete:dev-master
 
-'Copy javascript initializer to your public folder
+### Copy javascript initializer to your public folder
 
     cp vendor/fabiopaiva/zf2-doctrine-autocomplete/data/zf2-doctrine-autocomplete.min.js public/js/
 
@@ -39,13 +35,16 @@ Enable this module in your application.config.php
         )   
     );
 
-## Add javascript file to your layout (copy this file from data folder)
+## Add javascript file to your layout 
+* Copy this file from data folder
 
     echo $this
         ->headScript()
         ->prependFile($this->basePath() . '/js/zf2-doctrine-autocomplete.min.js');
 
-## Create a custom form element and configure the options
+## Create a custom form element with your parameters
+
+* This file must be statically configured because is called from Zf2DoctrineAutocomplete engine
 
     <?php
 
@@ -64,6 +63,7 @@ Enable this module in your application.config.php
                 'target_class' => 'Application\Entity\MyEntity',
                 'searchFields' => array('code', 'description'),
                 'empty_item_label' => 'Nothing found',
+                'select_warning_message' => 'Select a itemName in list',
                 'property' => 'description'
             ));
             $this->initialized = true;
@@ -90,5 +90,6 @@ Enable this module in your application.config.php
         ));
 
 ## Add elements dinamically
+After add the new element in page, call the initializer:
 
     zf2DoctrineAutocomplete.init('#jQuerySelector');

@@ -91,7 +91,8 @@ class ObjectAutocomplete extends Text {
         if (!$this->initialized) {
             $this->setAttribute('data-zf2doctrineacclass', urlencode(str_replace('\\', '-', $options['class'])));
             $this->setAttribute('data-zf2doctrineacproperty', $options['property']);
-            $this->setAttribute('data-zf2doctrineacinit', 'zf2-doctrine-autocomplete');
+            $this->setAttribute('data-zf2doctrineacselectwarningmessage', $options['select_warning_message']);
+            $this->setAttribute('data-zf2doctrineacinit', 'zf2-doctrine-autocomplete');            
             $this->initialized = true;
         }
         $this->getProxy()->setOptions($options);
