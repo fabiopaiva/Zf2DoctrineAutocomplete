@@ -36,7 +36,7 @@ Enable this module in your application.config.php
     );
 
 ## Add javascript file to your layout 
-* Copy this file from data folder
+Copy this file from data folder
 
     echo $this
         ->headScript()
@@ -44,7 +44,7 @@ Enable this module in your application.config.php
 
 ## Create a custom form element with your parameters
 
-* This file must be statically configured because is called from Zf2DoctrineAutocomplete engine
+This file must be statically configured because is called from Zf2DoctrineAutocomplete engine
 
     <?php
 
