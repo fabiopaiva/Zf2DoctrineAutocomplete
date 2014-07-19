@@ -62,7 +62,8 @@ This file must be statically configured because is called from Zf2DoctrineAutoco
         if (!$this->initialized) {
             $options = array_merge($options, array(
                 'class' => get_class($this),
-                'object_manager' => $options['sm']->get('Doctrine\ORM\EntityManager'),
+                'object_manager' => $options['sm']->get('Doctrine\ORM\EntityManager'), // For Doctrine ORM
+                // 'object_manager' => $options['sm']->get('doctrine.documentmanager.odm_default'), // For Doctrine ODM (Mongodb)
                 'target_class' => 'Application\Entity\MyEntity',
                 'searchFields' => array('code', 'description'),
                 'empty_item_label' => 'Nothing found',
