@@ -68,7 +68,8 @@ This file must be statically configured because is called from Zf2DoctrineAutoco
                 'searchFields' => array('code', 'description'),
                 'empty_item_label' => 'Nothing found',
                 'select_warning_message' => 'Select a itemName in list',
-                'property' => 'description'
+                'property' => 'description',
+		//'allow_persist_new' => true //Allow to persist a new record. Need to set cascade={"persist"} in your entity
             ));
             $this->initialized = true;
             }

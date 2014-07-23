@@ -25,8 +25,14 @@ class ObjectAutocomplete extends Text {
      */
     public function setValue($value) {
         if(!is_object($value)){
+            if(is_array($value) && array_key_exists('id', $value)){
+                $this->setAttribute('data-zf2doctrineacid', $value['id']);
+                return parent::setValue($value[$this->getProxy()->getProperty()]);
+            }
+            else{
             $this->setAttribute('data-zf2doctrineacid', $value);
             return parent::setValue($value);
+            }
         }
         $id = $this->getProxy()->getValue($value);
         $this->setAttribute('data-zf2doctrineacid', $id);
@@ -92,7 +98,10 @@ class ObjectAutocomplete extends Text {
             $this->setAttribute('data-zf2doctrineacclass', urlencode(str_replace('\\', '-', $options['class'])));
             $this->setAttribute('data-zf2doctrineacproperty', $options['property']);
             $this->setAttribute('data-zf2doctrineacselectwarningmessage', $options['select_warning_message']);
-            $this->setAttribute('data-zf2doctrineacinit', 'zf2-doctrine-autocomplete');            
+            $this->setAttribute('data-zf2doctrineacinit', 'zf2-doctrine-autocomplete');
+            if($options['allow_persist_new']){
+                $this->setAttribute('data-zf2doctrineacallowpersist', 'true');
+            }
             $this->initialized = true;
         }
         $this->getProxy()->setOptions($options);
