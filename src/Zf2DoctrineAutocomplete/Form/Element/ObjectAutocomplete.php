@@ -99,7 +99,7 @@ class ObjectAutocomplete extends Text {
             $this->setAttribute('data-zf2doctrineacproperty', $options['property']);
             $this->setAttribute('data-zf2doctrineacselectwarningmessage', $options['select_warning_message']);
             $this->setAttribute('data-zf2doctrineacinit', 'zf2-doctrine-autocomplete');
-            if($options['allow_persist_new']){
+            if(isset($options['allow_persist_new']) && $options['allow_persist_new']){
                 $this->setAttribute('data-zf2doctrineacallowpersist', 'true');
             }
             $this->initialized = true;

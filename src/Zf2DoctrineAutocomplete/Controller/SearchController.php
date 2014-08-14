@@ -39,26 +39,30 @@ class SearchController extends AbstractActionController {
         $qb = $proxy->getObjectManager()->getRepository($proxy->getTargetClass())
                 ->createQueryBuilder('q');
         $driver = '';
-        if(class_exists("\Doctrine\ORM\QueryBuilder") && $qb instanceof \Doctrine\ORM\QueryBuilder){
+        if (class_exists("\Doctrine\ORM\QueryBuilder") && $qb instanceof \Doctrine\ORM\QueryBuilder) {
             /* @var $qb \Doctrine\ORM\QueryBuilder */
             $qb->setMaxResults(20);
             $driver = 'orm';
-        }
-        elseif(class_exists("\Doctrine\ODM\MongoDB\Query\Builder") && $qb instanceof \Doctrine\ODM\MongoDB\Query\Builder){
-            /* @var $qb \Doctrine\ODM\MongoDB\Query\Builder */            
+        } elseif (class_exists("\Doctrine\ODM\MongoDB\Query\Builder") && $qb instanceof \Doctrine\ODM\MongoDB\Query\Builder) {
+            /* @var $qb \Doctrine\ODM\MongoDB\Query\Builder */
             $qb->limit(20);
             $driver = 'odm';
-        }
-        else{
+        } else {
             throw new \Exception('Can\'t find ORM or ODM doctrine driver');
         }
 
         foreach ($options['searchFields'] as $field) {
-            if($driver == 'orm'){
+            if ($driver == 'orm') {
                 $qb->orWhere($qb->expr()->like('q.' . $field, $qb->expr()->literal("%{$term}%")));
-            }
-            elseif($driver == 'odm'){
+            } elseif ($driver == 'odm') {
                 $qb->addOr($qb->expr()->field($field)->equals(new \MongoRegex("/{$term}/i")));
+            }
+        }
+        if ($options['orderBy']) {
+            if ($driver == 'orm') {
+                $qb->orderBy('q.' . $options['orderBy'][0], $options['orderBy'][1]);
+            } elseif ($driver == 'odm') {
+                $qb->sort($options['orderBy'][0], $options['orderBy'][1]);
             }
         }
         $this->setObjects($qb->getQuery()->execute());
