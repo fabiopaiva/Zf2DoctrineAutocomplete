@@ -1,5 +1,5 @@
 {
-    "name": "fabiopaiva/zf2-doctrine-autocomplete",
+    "name": "psobbunse/zf2-doctrine-autocomplete",
     "description": "Provides a autocomplete form for ZF2 and Doctrine2.",
     "type": "library",
     "license": "MIT",
@@ -12,6 +12,11 @@
             "name": "Fábio Paiva",
             "email": "paiva.fabiofelipe@gmail.com",
             "homepage": "http://sigweb.net.br"
+        },
+        {
+            "name": "Benjamin Bunse",
+            "email": "b.bunse@pso-vertrieb.de",
+            "homepage": "http://www.pso-vertrieb.de"
         }
     ],
     "require": {
