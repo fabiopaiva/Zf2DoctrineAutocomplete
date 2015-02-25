@@ -12,6 +12,7 @@ var zf2DoctrineAutocomplete = {
                     var _select_warning_message = $(this).data('zf2doctrineacselectwarningmessage');
                     var _property = $(this).data('zf2doctrineacproperty');
                     var _allow_persist = $(this).data('zf2doctrineacallowpersist');
+                    var _target_class = $(this).data('zf2doctrineactargetclass');
                     if (_class == null)
                         return;
                     /*
@@ -50,6 +51,7 @@ var zf2DoctrineAutocomplete = {
                             }
                             request.select_warning_message = _select_warning_message;
                             request.property = _property;
+                            request.target_class = _target_class;
 
                             $.getJSON('/zf2-doctrine-autocomplete/' + _class,
                                     request,

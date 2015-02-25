@@ -47,6 +47,7 @@ class ObjectAutocomplete extends Text {
                 ) {
             $label = $generatedLabel;
         } elseif ($property = $this->getProxy()->getProperty()) {
+            $targetClass = $this->getProxy()->getTargetClass();
             if ($this->getProxy()->getIsMethod() == false && !$metadata->hasField($property)) {
                         throw new RuntimeException(
                             sprintf(
@@ -98,6 +99,7 @@ class ObjectAutocomplete extends Text {
             $this->setAttribute('data-zf2doctrineacclass', urlencode(str_replace('\\', '-', $options['class'])));
             $this->setAttribute('data-zf2doctrineacproperty', $options['property']);
             $this->setAttribute('data-zf2doctrineacselectwarningmessage', $options['select_warning_message']);
+            $this->setAttribute('data-zf2doctrineactargetclass', urlencode(str_replace('\\', '-', $options['target_class'])));
             $this->setAttribute('data-zf2doctrineacinit', 'zf2-doctrine-autocomplete');
             if(isset($options['allow_persist_new']) && $options['allow_persist_new']){
                 $this->setAttribute('data-zf2doctrineacallowpersist', 'true');

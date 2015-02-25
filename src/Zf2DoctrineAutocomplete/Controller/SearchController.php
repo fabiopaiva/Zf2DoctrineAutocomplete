@@ -26,13 +26,17 @@ class SearchController extends AbstractActionController {
         $property = $this->params()->fromQuery('property', '');
         $select_warning_message = $this->params()->fromQuery('select_warning_message', '');
 
+        $targetClass = $this->params()->fromRoute('target_class');
+        $targetClass = str_replace('-', '\\', $targetClass);
+
         $factory = new Factory();
         $element = $factory->createElement(array(
             'type' => $elementName,
             'options' => array(
                 'sm' => $this->getServiceLocator(),
-              'select_warning_message' => $select_warning_message,
-              'property' => $property
+                'select_warning_message' => $select_warning_message,
+                'property' => $property,
+                'target_class' => $targetClass
             )
         ));
         $options = $element->getOptions();
