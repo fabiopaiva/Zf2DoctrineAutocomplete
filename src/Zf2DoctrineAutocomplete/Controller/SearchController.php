@@ -30,10 +30,10 @@ class SearchController extends AbstractActionController {
         $targetClass = str_replace('-', '\\', $targetClass);
 
         $searchFields = $this->params()->fromQuery('search_fields', '');
-        $searchFields = json_decode($searchFields);
+        $searchFields = json_decode(urldecode($searchFields));
 
         $orderby = $this->params()->fromQuery('order_by', '');
-        $orderby = json_decode($orderby);
+        $orderby = json_decode(urldecode($orderby));
 
         $factory = new Factory();
         $element = $factory->createElement(array(
