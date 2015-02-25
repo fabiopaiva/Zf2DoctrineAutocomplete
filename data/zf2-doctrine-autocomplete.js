@@ -48,7 +48,9 @@ var zf2DoctrineAutocomplete = {
                                 response(cache[ term ]);
                                 return;
                             }
-                            console.log("Request", request);
+                            request.select_warning_message = _select_warning_message;
+                            request.property = _property;
+
                             $.getJSON('/zf2-doctrine-autocomplete/' + _class,
                                     request,
                                     function(data, status, xhr) {
