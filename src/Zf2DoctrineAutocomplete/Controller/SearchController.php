@@ -29,6 +29,12 @@ class SearchController extends AbstractActionController {
         $targetClass = $this->params()->fromQuery('target_class', '');
         $targetClass = str_replace('-', '\\', $targetClass);
 
+        $searchFields = $this->params()->fromQuery('search_fields', '');
+        $searchFields = json_decode($searchFields);
+
+        $orderby = $this->params()->fromQuery('order_by', '');
+        $orderby = json_decode($orderby);
+
         $factory = new Factory();
         $element = $factory->createElement(array(
             'type' => $elementName,
@@ -36,7 +42,9 @@ class SearchController extends AbstractActionController {
                 'sm' => $this->getServiceLocator(),
                 'select_warning_message' => $select_warning_message,
                 'property' => $property,
-                'target_class' => $targetClass
+                'target_class' => $targetClass,
+                'search_fields' => $searchFields,
+                'orderBy' => $orderby
             )
         ));
         $options = $element->getOptions();

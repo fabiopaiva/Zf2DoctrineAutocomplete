@@ -13,6 +13,9 @@ var zf2DoctrineAutocomplete = {
                     var _property = $(this).data('zf2doctrineacproperty');
                     var _allow_persist = $(this).data('zf2doctrineacallowpersist');
                     var _target_class = $(this).data('zf2doctrineactargetclass');
+                    var _search_fields = $(this).data('zf2doctrineacsearchfields');
+                    var _order_by = $(this).data('zf2doctrineacorderby');
+
                     if (_class == null)
                         return;
                     /*
@@ -52,6 +55,8 @@ var zf2DoctrineAutocomplete = {
                             request.select_warning_message = _select_warning_message;
                             request.property = _property;
                             request.target_class = _target_class;
+                            request.search_fields = _search_fields;
+                            request.order_by = _order_by;
 
                             $.getJSON('/zf2-doctrine-autocomplete/' + _class,
                                     request,
