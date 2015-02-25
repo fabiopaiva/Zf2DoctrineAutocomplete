@@ -1,5 +1,5 @@
 {
-    "name": "psobbunse/zf2-doctrine-autocomplete",
+    "name": "fabiopaiva/zf2-doctrine-autocomplete",
     "description": "Provides a autocomplete form for ZF2 and Doctrine2.",
     "type": "library",
     "license": "MIT",
