@@ -26,7 +26,7 @@ class SearchController extends AbstractActionController {
         $property = $this->params()->fromQuery('property', '');
         $select_warning_message = $this->params()->fromQuery('select_warning_message', '');
 
-        $targetClass = $this->params()->fromRoute('target_class');
+        $targetClass = $this->params()->fromRoute('target_class', '');
         $targetClass = str_replace('-', '\\', $targetClass);
 
         $factory = new Factory();
