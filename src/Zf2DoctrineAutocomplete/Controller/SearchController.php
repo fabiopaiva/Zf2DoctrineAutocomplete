@@ -43,7 +43,7 @@ class SearchController extends AbstractActionController {
                 'select_warning_message' => $select_warning_message,
                 'property' => $property,
                 'target_class' => $targetClass,
-                'search_fields' => $searchFields,
+                'searchFields' => $searchFields,
                 'orderBy' => $orderby
             )
         ));
