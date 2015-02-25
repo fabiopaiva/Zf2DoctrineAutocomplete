@@ -1,7 +1,8 @@
 /**
  * @author Fábio Paiva <paiva.fabiofelipe@gmail.com>
+ * @author Benjamin Bunse <b.bunse@pso-vertrieb.de>
+ * @license The MIT License (MIT) | Copyright (c) 2014 Fabio Felipe Paiva <paiva.fabiofelipe@gmail.com> | Copyright (c) 2015 Benjamin Bunse <b.bunse@pso-vertrieb.de>
  */
-
 var zf2DoctrineAutocomplete = {
     init: function(selector) {
         $(selector)
@@ -19,7 +20,7 @@ var zf2DoctrineAutocomplete = {
                     $(this).data('zf2doctrineacinit', null);
                     $(this).data('zf2doctrineacclass', null);
                     $(this).data('zf2doctrineacproperty', null);
-                    /**
+                    /*
                      * Wrap
                      */
                     $(this).wrap('<div class="wrap-zf2-doctrine-autocomplete"></div>');
@@ -35,7 +36,7 @@ var zf2DoctrineAutocomplete = {
                     }
                     $(this).parent().append(_clone);
                     $(this).parent().append('<p class="zf2-doctrine-autocomplete-msg"></p>');
-                    /** 
+                    /*
                      * autocomplete
                      */
                     var cache = {};
@@ -47,6 +48,7 @@ var zf2DoctrineAutocomplete = {
                                 response(cache[ term ]);
                                 return;
                             }
+                            console.log("Request", request);
                             $.getJSON('/zf2-doctrine-autocomplete/' + _class,
                                     request,
                                     function(data, status, xhr) {
