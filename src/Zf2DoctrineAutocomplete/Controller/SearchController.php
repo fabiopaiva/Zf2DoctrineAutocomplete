@@ -9,6 +9,7 @@ namespace Zf2DoctrineAutocomplete\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\Form\Factory;
+use Zend\Code\Exception\RuntimeException;
 
 class SearchController extends AbstractActionController {
 
