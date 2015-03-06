@@ -92,13 +92,7 @@ var zf2DoctrineAutocomplete = {
                                 return false;
                             }
 
-                        },
-                        /* FIX from: http://stackoverflow.com/a/5931812 */
-                        _resizeMenu: function () {
-                            var ul = this.menu.element;
-                            ul.outerWidth(this.element.outerWidth());
                         }
-
                     });
                 });
     }
