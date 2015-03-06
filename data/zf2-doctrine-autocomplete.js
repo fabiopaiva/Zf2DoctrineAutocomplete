@@ -95,6 +95,11 @@ var zf2DoctrineAutocomplete = {
                         }
 
                     });
+                    /* FIX from: http://stackoverflow.com/a/5931812 */
+                    $(_clone).data("autocomplete")._resizeMenu = function () {
+                        var ul = this.menu.element;
+                        ul.outerWidth(this.element.outerWidth());
+                    }
                 });
     }
 };
