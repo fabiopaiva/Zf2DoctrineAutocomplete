@@ -46,6 +46,7 @@ var zf2DoctrineAutocomplete = {
                     var cache = {};
                     $(_clone).autocomplete({
                         minLength: 2,
+                        appendTo: $(this).parent(),
                         source: function(request, response) {
                             var term = request.term;
                             if (term in cache) {
