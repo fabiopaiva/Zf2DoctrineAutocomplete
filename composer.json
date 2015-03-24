@@ -12,6 +12,11 @@
             "name": "Fábio Paiva",
             "email": "paiva.fabiofelipe@gmail.com",
             "homepage": "http://sigweb.net.br"
+        },
+        {
+            "name": "Benjamin Bunse",
+            "email": "b.bunse@pso-vertrieb.de",
+            "homepage": "http://www.pso-vertrieb.de"
         }
     ],
     "require": {

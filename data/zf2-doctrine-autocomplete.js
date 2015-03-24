@@ -1,7 +1,8 @@
 /**
  * @author Fábio Paiva <paiva.fabiofelipe@gmail.com>
+ * @author Benjamin Bunse <b.bunse@pso-vertrieb.de>
+ * @license The MIT License (MIT) | Copyright (c) 2014 Fabio Felipe Paiva <paiva.fabiofelipe@gmail.com> | Copyright (c) 2015 Benjamin Bunse <b.bunse@pso-vertrieb.de>
  */
-
 var zf2DoctrineAutocomplete = {
     init: function(selector) {
         $(selector)
@@ -11,6 +12,10 @@ var zf2DoctrineAutocomplete = {
                     var _select_warning_message = $(this).data('zf2doctrineacselectwarningmessage');
                     var _property = $(this).data('zf2doctrineacproperty');
                     var _allow_persist = $(this).data('zf2doctrineacallowpersist');
+                    var _target_class = $(this).data('zf2doctrineactargetclass');
+                    var _search_fields = $(this).data('zf2doctrineacsearchfields');
+                    var _order_by = $(this).data('zf2doctrineacorderby');
+
                     if (_class == null)
                         return;
                     /*
@@ -19,7 +24,7 @@ var zf2DoctrineAutocomplete = {
                     $(this).data('zf2doctrineacinit', null);
                     $(this).data('zf2doctrineacclass', null);
                     $(this).data('zf2doctrineacproperty', null);
-                    /**
+                    /*
                      * Wrap
                      */
                     $(this).wrap('<div class="wrap-zf2-doctrine-autocomplete"></div>');
@@ -35,18 +40,25 @@ var zf2DoctrineAutocomplete = {
                     }
                     $(this).parent().append(_clone);
                     $(this).parent().append('<p class="zf2-doctrine-autocomplete-msg"></p>');
-                    /** 
+                    /*
                      * autocomplete
                      */
                     var cache = {};
                     $(_clone).autocomplete({
                         minLength: 2,
+                        // appendTo: $(this).parent(),
                         source: function(request, response) {
                             var term = request.term;
                             if (term in cache) {
                                 response(cache[ term ]);
                                 return;
                             }
+                            request.select_warning_message = _select_warning_message;
+                            request.property = _property;
+                            request.target_class = _target_class;
+                            request.search_fields = _search_fields;
+                            request.order_by = _order_by;
+
                             $.getJSON('/zf2-doctrine-autocomplete/' + _class,
                                     request,
                                     function(data, status, xhr) {
@@ -81,7 +93,6 @@ var zf2DoctrineAutocomplete = {
                             }
 
                         }
-
                     });
                 });
     }

@@ -9,6 +9,7 @@ namespace Zf2DoctrineAutocomplete\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\Form\Factory;
+use Zend\Code\Exception\RuntimeException;
 
 class SearchController extends AbstractActionController {
 
@@ -23,11 +24,28 @@ class SearchController extends AbstractActionController {
 
         $term = $this->params()->fromQuery('term', '');
 
+        $property = $this->params()->fromQuery('property', '');
+        $select_warning_message = $this->params()->fromQuery('select_warning_message', '');
+
+        $targetClass = $this->params()->fromQuery('target_class', '');
+        $targetClass = str_replace('-', '\\', $targetClass);
+
+        $searchFields = $this->params()->fromQuery('search_fields', '');
+        $searchFields = json_decode(urldecode($searchFields));
+
+        $orderby = $this->params()->fromQuery('order_by', '');
+        $orderby = json_decode(urldecode($orderby));
+
         $factory = new Factory();
         $element = $factory->createElement(array(
             'type' => $elementName,
             'options' => array(
-                'sm' => $this->getServiceLocator()
+                'sm' => $this->getServiceLocator(),
+                'select_warning_message' => $select_warning_message,
+                'property' => $property,
+                'target_class' => $targetClass,
+                'searchFields' => $searchFields,
+                'orderBy' => $orderby
             )
         ));
         $options = $element->getOptions();
